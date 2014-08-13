@@ -1,0 +1,17 @@
+5 7  
+Cairo Alexandria 200  
+Cairo Tanta 500  
+Alexandria Kenna 100  
+Alexandria Sinai 700  
+Kenna Tanta 100  
+Tanta Kenna 100 
+Tanta Sinai 300  
+8 
+what is the shortest path between Cairo to Sinai?  
+What is the Cost of Path Cairo Sinai Tanta? 
+What is the Cost of Path Cairo Tanta Sinai? 
+Give me route between Alexandria to Sinai?  
+Give me route between Alexandria to Sohag? 
+What are the reachable cities from Cairo using 2 Edges at Most? 
+What are the reachable cities from Cairo using 4 Edges at Minimum?   
+What is the answer of Query 1? 
