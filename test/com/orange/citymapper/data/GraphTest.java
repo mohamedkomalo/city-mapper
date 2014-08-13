@@ -1,4 +1,4 @@
-package com.orange.citymapper;
+package com.orange.citymapper.data;
 
 import org.junit.Assert;
 import org.junit.Test;

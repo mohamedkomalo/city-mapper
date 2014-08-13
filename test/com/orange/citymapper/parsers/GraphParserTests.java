@@ -1,4 +1,4 @@
-package com.orange.citymapper;
+package com.orange.citymapper.parsers;
 
 import static org.junit.Assert.*;
 
