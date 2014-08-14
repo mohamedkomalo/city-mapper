@@ -31,7 +31,7 @@ public class Main {
 		for(int i=0; i<queries; i++){
 			String queryLine = input.nextLine();
 			
-			IQuery queryObj = createQuery(queryLine);
+			IQuery queryObj = QueryFactory.createQuery(queryLine);
 			
 			String queryResult;
 			
@@ -45,22 +45,5 @@ public class Main {
 		file.writeln("out.txt", resultOut.toString());
 	}
 
-	static IQuery createQuery(String queryLine){
-		IQuery queryObj = null;
 		
-		if(new ShortestPathQuery().checkCorrectQuery(queryLine))
-			queryObj = new ShortestPathQuery();
-		
-		else if(new CostQuery().checkCorrectQuery(queryLine))
-			queryObj = new CostQuery();
-		
-		else if(new RouteQuery().checkCorrectQuery(queryLine))
-			queryObj = new RouteQuery();
-		
-		else if(new ReachableCitiesAtMostQuery().checkCorrectQuery(queryLine))
-			queryObj = new ReachableCitiesAtMostQuery();
-		
-		return queryObj;
-	}
-	
 }
