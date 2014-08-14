@@ -9,7 +9,11 @@ public class Graph {
 	Map<String, Map<String, Edge>> graph = new HashMap<>();
 	
 	public void addEdge(Edge edge) {
-
+		/*
+		 *  TODO refactor: extract methods like addCity, containsCity, rename
+		 *  class to something like map, rename function to something like addRoad
+		 *  overall rename to names that relate to the problem domain 
+		 */
 		String destName = edge.getDestination().getName();
 		String srcName = edge.getSource().getName();
 		
