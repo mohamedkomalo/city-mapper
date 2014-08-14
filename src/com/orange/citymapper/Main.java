@@ -1,17 +1,11 @@
 package com.orange.citymapper;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 import com.orange.citymapper.data.Graph;
 import com.orange.citymapper.parsers.GraphParser;
-import com.orange.citymapper.queries.CostQuery;
 import com.orange.citymapper.queries.IQuery;
-import com.orange.citymapper.queries.ReachableCitiesAtMostQuery;
-import com.orange.citymapper.queries.RouteQuery;
-import com.orange.citymapper.queries.ShortestPathQuery;
 
 public class Main {
 	public static void main(String[] args) throws IOException {

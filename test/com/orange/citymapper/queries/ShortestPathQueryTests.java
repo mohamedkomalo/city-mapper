@@ -8,7 +8,6 @@ import com.orange.citymapper.data.City;
 import com.orange.citymapper.data.Edge;
 import com.orange.citymapper.data.Graph;
 import com.orange.citymapper.queries.ShortestPathQuery;
-import com.orange.citymapper.shortestpath.Dikstra;
 
 public class ShortestPathQueryTests {
 
@@ -67,8 +66,6 @@ public class ShortestPathQueryTests {
 		graph.addEdge(new Edge(tanta, kenna, 100));
 		graph.addEdge(new Edge(tanta, sinai, 300));
 
-		Dikstra dikstra = new Dikstra();
-		
 		assertEquals("The shortest path between Cairo to Kenna is 300",
 					 shortestPathQuery.getResult("What is the shortest path between Cairo to Kenna?", graph));
 		

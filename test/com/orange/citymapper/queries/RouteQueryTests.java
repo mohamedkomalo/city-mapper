@@ -4,10 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.orange.citymapper.data.City;
-import com.orange.citymapper.data.Edge;
-import com.orange.citymapper.data.Graph;
-
 public class RouteQueryTests {
 
 	@Test
