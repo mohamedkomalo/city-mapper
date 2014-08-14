@@ -11,19 +11,13 @@ public class ShortestPathQuery implements IQuery {
 
 	private static final int DEST_NUMBER = 2;
 	private static final int SOURCE_NUMBER = 1;
-	private static final String QUERY_REGEXP_PATTERN = "^[Ww]hat is the shortest path between (\\S+) to (\\S+)\\?$";
+	private static final String QUERY_REGEXP_PATTERN = "[Ww]hat is the shortest path between (\\S+) to (\\S+)\\?";
 
-	/* (non-Javadoc)
-	 * @see com.orange.citymapper.queries.IQuery#checkCorrectQuery(java.lang.String)
-	 */
 	@Override
 	public boolean checkCorrectQuery(String queryString) {
 		return queryString.matches(QUERY_REGEXP_PATTERN);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.orange.citymapper.queries.IQuery#getResult(java.lang.String, com.orange.citymapper.data.Graph)
-	 */
 	@Override
 	public String getResult(String queryString, Graph graph) {
 		String sourceCity = getSource(queryString);

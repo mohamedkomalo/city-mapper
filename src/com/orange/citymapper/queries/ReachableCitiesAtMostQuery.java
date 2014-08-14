@@ -4,6 +4,7 @@ import com.orange.citymapper.data.Graph;
 
 public class ReachableCitiesAtMostQuery  implements IQuery {
 
+	@Override
 	public boolean checkCorrectQuery(String queryString) {
 		return queryString.matches("^What are the reachable cities from (\\S+) using (\\d+) Edges at Most\\?$");
 	}
