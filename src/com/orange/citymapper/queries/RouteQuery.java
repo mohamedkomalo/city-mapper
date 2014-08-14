@@ -4,8 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.orange.citymapper.data.Graph;
-import com.orange.citymapper.shortestpath.Dikstra;
-import com.orange.citymapper.shortestpath.Dikstra.Path;
+import com.orange.citymapper.graph.algorithms.Dikstra;
+import com.orange.citymapper.graph.algorithms.Dikstra.Path;
 
 public class RouteQuery implements IQuery {
 

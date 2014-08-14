@@ -11,7 +11,7 @@ import org.junit.Test;
 import com.orange.citymapper.data.City;
 import com.orange.citymapper.data.Edge;
 import com.orange.citymapper.data.Graph;
-import com.orange.citymapper.shortestpath.Dikstra;
+import com.orange.citymapper.graph.algorithms.Dikstra;
 
 public class GraphAdapterTest {
 

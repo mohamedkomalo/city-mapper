@@ -1,4 +1,4 @@
-package com.orange.citymapper.shortestpath;
+package com.orange.citymapper.graph.algorithms;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
+
+import com.orange.citymapper.graph.algorithms.Dikstra;
 
 public class DikstraTest {
 

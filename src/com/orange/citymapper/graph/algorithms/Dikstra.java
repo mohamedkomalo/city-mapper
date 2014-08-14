@@ -1,4 +1,4 @@
-package com.orange.citymapper.shortestpath;
+package com.orange.citymapper.graph.algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
