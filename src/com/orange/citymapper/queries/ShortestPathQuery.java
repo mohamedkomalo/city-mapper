@@ -11,7 +11,7 @@ public class ShortestPathQuery {
 
 	private static final int DEST_NUMBER = 2;
 	private static final int SOURCE_NUMBER = 1;
-	private static final String QUERY_REGEXP_PATTERN = "^What is the shortest path between (\\S+) to (\\S+)\\?$";
+	private static final String QUERY_REGEXP_PATTERN = "^[Ww]hat is the shortest path between (\\S+) to (\\S+)\\?$";
 
 	public boolean checkCorrectQuery(String queryString) {
 		return queryString.matches(QUERY_REGEXP_PATTERN);

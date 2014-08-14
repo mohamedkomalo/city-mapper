@@ -22,7 +22,7 @@ public class GraphParser {
 		graph.addEdge(new Edge(new City(sourceName), new City(destName), cost));
 	}
 
-	public void parseGraphText(String graphTextInput) {
+	public Scanner parseGraphText(String graphTextInput) {
 		Scanner scanner = new Scanner(graphTextInput);
 		
 		scanner.nextInt();	// ignoring no of nodes because we don't need it to build the graph
@@ -35,6 +35,6 @@ public class GraphParser {
 			String edgeLine = scanner.nextLine();
 			this.parseEdgeLine(edgeLine);
 		}
-		
+		return scanner;
 	}
 }
