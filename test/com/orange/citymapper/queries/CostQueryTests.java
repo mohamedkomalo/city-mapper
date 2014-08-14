@@ -2,6 +2,8 @@ package com.orange.citymapper.queries;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.junit.Test;
 
 public class CostQueryTests {
@@ -22,7 +24,7 @@ public class CostQueryTests {
 
 		assertTrue(result);
 	}
-	
+
 	@Test
 	public void testCostQueryWihInvalidQuerySyntax() {
 		CostQuery costQuery = new CostQuery();
@@ -30,6 +32,16 @@ public class CostQueryTests {
 		boolean result = costQuery.checkCorrectQuery("In the sea there are fishes");
 
 		assertFalse(result);
+	}
+	
+	@Test
+	public void testExtractCities(){
+		CostQuery costquery = new CostQuery();
+		String query = "What is the Cost of Path Cairo Sinai Tanta?";
+		List<String> cities =costquery.extractCities(query);
+		assertEquals("Cairo",cities.get(0));
+		assertEquals("Sinai",cities.get(1));
+		assertEquals("Tanta",cities.get(2));
 	}
 	
 	//	@Test
@@ -55,6 +67,5 @@ public class CostQueryTests {
 	//		assertEquals("The Cost of Path Cairo Tanta Sinai is 800 ", queryResult);
 	//		
 	//	}
-
 }
 
