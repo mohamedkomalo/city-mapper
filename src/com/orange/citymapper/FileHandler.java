@@ -1,5 +1,6 @@
 package com.orange.citymapper;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -10,5 +11,11 @@ public class FileHandler {
 	  byte[] encoded = Files.readAllBytes(Paths.get(path));
 	  
 	  return new String(encoded, Charset.defaultCharset());
+	}
+
+	public void writeln(String string, String content) throws IOException{
+		FileWriter writer = new FileWriter(string);
+		writer.write(content);
+		writer.close();
 	}
 }

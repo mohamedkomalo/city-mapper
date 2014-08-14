@@ -14,7 +14,7 @@ public class ShortestPathQueryTests {
 
 	@Test
 	public void testCheckCorrectQueryWihValidQuerySyntax() {
-		ShortestPathQuery shortestPathQuery = new ShortestPathQuery();
+		IQuery shortestPathQuery = new ShortestPathQuery();
 		
 		boolean result = shortestPathQuery.checkCorrectQuery("What is the shortest path between Cairo to Kenna?");
 		
@@ -23,7 +23,7 @@ public class ShortestPathQueryTests {
 	
 	@Test
 	public void testCheckCorrectQueryWihInvalidQuerySyntax() {
-		ShortestPathQuery shortestPathQuery = new ShortestPathQuery();
+		IQuery shortestPathQuery = new ShortestPathQuery();
 		
 		boolean result = shortestPathQuery.checkCorrectQuery("In the sea there are fishes");
 		
@@ -50,7 +50,7 @@ public class ShortestPathQueryTests {
 	
 	@Test
 	public void testGetResult(){
-		ShortestPathQuery shortestPathQuery = new ShortestPathQuery();
+		IQuery shortestPathQuery = new ShortestPathQuery();
 		
 		Graph graph = new Graph();
 		City cairo = new City("Cairo"),

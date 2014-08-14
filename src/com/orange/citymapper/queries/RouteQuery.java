@@ -2,9 +2,9 @@ package com.orange.citymapper.queries;
 
 import com.orange.citymapper.data.Graph;
 
-public class RouteQuery {
+public class RouteQuery implements IQuery {
 
-	public boolean checkCorrectQuery(String queryString) {
+	public boolean checkCorrectQuery(String queryString)  {
 		return queryString.matches("^Give me route between (\\S+) to (\\S+)\\?$");
 	}
 

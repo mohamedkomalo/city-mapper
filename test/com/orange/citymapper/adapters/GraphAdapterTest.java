@@ -11,6 +11,7 @@ import org.junit.Test;
 import com.orange.citymapper.data.City;
 import com.orange.citymapper.data.Edge;
 import com.orange.citymapper.data.Graph;
+import com.orange.citymapper.queries.IQuery;
 import com.orange.citymapper.queries.ShortestPathQuery;
 import com.orange.citymapper.shortestpath.Dikstra;
 
@@ -59,7 +60,7 @@ public class GraphAdapterTest {
 
 	@Test
 	public void testGraphAdapterWithDikstra(){
-		ShortestPathQuery shortestPathQuery = new ShortestPathQuery();
+		IQuery shortestPathQuery = new ShortestPathQuery();
 		
 		Graph graph = new Graph();
 		City cairo = new City("Cairo"),

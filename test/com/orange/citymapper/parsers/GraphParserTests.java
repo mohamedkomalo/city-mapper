@@ -2,6 +2,8 @@ package com.orange.citymapper.parsers;
 
 import static org.junit.Assert.*;
 
+import java.util.Scanner;
+
 import org.junit.Test;
 
 import com.orange.citymapper.data.City;
@@ -41,7 +43,7 @@ public class GraphParserTests {
 		
 		GraphParser graphParser = new GraphParser(graph);
 		
-		graphParser.parseGraphText(graphTextInput);
+		graphParser.parseGraphText(new Scanner(graphTextInput));
 		
 		Graph expectedGraph = new Graph();
 		City cairo = new City("Cairo"),
