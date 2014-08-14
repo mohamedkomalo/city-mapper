@@ -4,28 +4,37 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.orange.citymapper.data.Graph;
+import com.orange.citymapper.shortestpath.Dikstra;
+import com.orange.citymapper.shortestpath.Dikstra.Path;
 
 public class ShortestPathQuery {
 
 	private static final int DEST_NUMBER = 2;
 	private static final int SOURCE_NUMBER = 1;
-	private static final String QUERY_REGEXP_PATTERN = "^What is the shortest path between City (\\S+) to City (\\S+)\\?$";
+	private static final String QUERY_REGEXP_PATTERN = "^What is the shortest path between (\\S+) to (\\S+)\\?$";
 
 	public boolean checkCorrectQuery(String queryString) {
 		return queryString.matches(QUERY_REGEXP_PATTERN);
 	}
 
-	public String getResult(String string, Graph graph) {
-		Pattern queryPattern = Pattern.compile(QUERY_REGEXP_PATTERN);
-		Matcher matcher = queryPattern.matcher(string);
+	public String getResult(String queryString, Graph graph) {
+		String sourceCity = getSource(queryString);
+		String destinationCity = getDestination(queryString);
 		
-		matcher.find();
-		String sourceCity = string.substring(matcher.regionStart(), matcher.regionEnd());
-		
-		matcher.find();
-		String destinationCity = string.substring(matcher.regionStart(), matcher.regionEnd());
+		Dikstra dikstra = new Dikstra();
+		Path result = dikstra.getShortestPath(graph.getAdjacenceyMap(), sourceCity, destinationCity);
 				
-		return null;
+		String resultFormat = "The shortest path between %s to %s is %d";
+		
+		String resultMessage; 
+		if(result == null){
+			resultMessage = "The query is wronge sir";
+		}
+		else{
+			resultMessage = String.format(resultFormat, sourceCity, destinationCity, result.getCost());
+		}
+			
+		return resultMessage;
 	}
 
 	public String getSource(String string) {
@@ -49,6 +58,6 @@ public class ShortestPathQuery {
 		
 		String destination = matcher.group(cityNumber);
 		return destination;
-	}
+	}	
 
 }
