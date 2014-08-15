@@ -60,9 +60,7 @@ public class Dikstra {
 		private int cost;
 		
 		public Path(Path path) {
-			List<String> newList = new ArrayList<String>();
-			for(String node : path.nodes)
-				newList.add(node);
+			List<String> newList = new ArrayList<String>(path.nodes);
 			
 			init(newList, path.cost);
 		}
