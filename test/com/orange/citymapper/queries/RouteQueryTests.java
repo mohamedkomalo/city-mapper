@@ -27,7 +27,7 @@ public class RouteQueryTests {
 
 	@Test
 	public void testRouteQueryWihInvalidQuerySyntax() {
-		CostQuery costQuery = new CostQuery();
+		RouteQuery costQuery = new RouteQuery();
 
 		boolean result = costQuery.checkCorrectQuery("In the sea there are fishes");
 
