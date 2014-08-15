@@ -2,6 +2,7 @@ package com.orange.citymapper.queries;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.orange.citymapper.data.City;
@@ -15,29 +16,34 @@ public class RouteQueryTests {
 	private static final String TANTA_NAME = "Tanta";
 	private static final String ALEXENDRIA_NAME = "Alexendria";
 	private static final String CAIRO_NAME = "Cairo";
+	
+	private IQuery routeQuery;
 
+	private String createRouteQuery(String sourceCity, String destinationCity) {
+		return String.format("Give me route between %s to %s?", sourceCity, destinationCity);
+	}
+	
+	@Before
+	public void beforeTest(){
+		routeQuery = new RouteQuery();
+	}
+	
 	@Test
 	public void testRouteQueryWithValidCities() {
-		RouteQuery routeQuery = new RouteQuery();
-
-		boolean result = routeQuery.checkCorrectQuery("Give me route between Alexandria to Sinai?");
+		boolean result = routeQuery.checkCorrectQuery(createRouteQuery(ALEXENDRIA_NAME, SINAI_NAME));
 
 		assertTrue(result);
 	}
 
 	@Test
 	public void testRouteQueryWihInvalidQuerySyntax() {
-		RouteQuery costQuery = new RouteQuery();
-
-		boolean result = costQuery.checkCorrectQuery("In the sea there are fishes");
+		boolean result = routeQuery.checkCorrectQuery("In the sea there are fishes");
 
 		assertFalse(result);
 	}
 
 	@Test
 	public void testGetResult(){
-		RouteQuery routeQuery = new RouteQuery();
-
 		Graph graph = new Graph();
 		City cairo = new City(CAIRO_NAME),
 				alexendria = new City(ALEXENDRIA_NAME),
@@ -53,9 +59,8 @@ public class RouteQueryTests {
 		graph.addEdge(new Edge(tanta, kenna, 100));
 		graph.addEdge(new Edge(tanta, sinai, 300));
 
-		String queryResult = routeQuery.getResult(String.format("Give me route between %s to %s?", ALEXENDRIA_NAME, TANTA_NAME), graph);
+		String queryResult = routeQuery.getResult(createRouteQuery(ALEXENDRIA_NAME, TANTA_NAME), graph);
 		assertEquals(String.format("%s %s %s", ALEXENDRIA_NAME, KENNA_NAME, TANTA_NAME), queryResult);
 
 	}
-
 }
