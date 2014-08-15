@@ -30,9 +30,13 @@ public class ReachableNodesDetectorTest {
 		
 		
 		ReachableNodesDetector reachableNodesDetector = new ReachableNodesDetector();
-		
-		assertEquals(Arrays.asList("Alexandria", "Tanta"),
+
+		assertEquals(Arrays.asList(null, Arrays.asList("Alexandria", "Tanta")),
 					reachableNodesDetector.getReachableNodesWithinEdges(graph, "Cairo", 1));
+		
+		assertEquals(Arrays.asList(null, Arrays.asList("Alexandria", "Tanta"),
+								   Arrays.asList("Sinai", "Kenna")),
+				reachableNodesDetector.getReachableNodesWithinEdges(graph, "Cairo", 2));
 	}
 
 }
