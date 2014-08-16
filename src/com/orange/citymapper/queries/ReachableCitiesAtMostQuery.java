@@ -1,62 +1,74 @@
 package com.orange.citymapper.queries;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.orange.citymapper.data.Graph;
 import com.orange.citymapper.graph.algorithms.ReachableNodesDetector;
+import com.orange.citymapper.parsers.CollectionToStringConverter;
+import com.orange.citymapper.parsers.RegexParser;
 
-public class ReachableCitiesAtMostQuery  implements IQuery {
+public class ReachableCitiesAtMostQuery implements IQuery {
 
-	private static final String QUERY_REGEXP_PATTERN = "^What are the reachable cities from (\\S+) using (\\d+) Edges at Most\\?$";
+	private static final String QUERY_REGEX = "[Ww]hat are the reachable cities from (\\S+) using (\\d+) Edges at Most\\?";
+	
+	private static final Pattern QUERY_REGEX_PATTERN = Pattern.compile(QUERY_REGEX);
+	
+	private static final String REACHABLE_CITIES_FROM_CITY_USING_EDGE = "The reachable cities from %s using %d Edges at Most";
+	private static final String USING_EDGE_CITIES = "Using %d Edge: %s";
+	private static final String USING_EDGES_CITIES = "Using %d Edges: %s";
+
+
+	private static final int SOURCE_CITY = 0;
+	private static final int AT_MOST_EDGES = 1;
 
 	@Override
 	public boolean checkCorrectQuery(String queryString) {
-		return queryString.matches(QUERY_REGEXP_PATTERN);
+		return queryString.matches(QUERY_REGEX);
 	}
 
 	@Override
 	public String getResult(String queryString, Graph graph) {
+		String[] queryVariables = RegexParser.extractVariables(queryString, QUERY_REGEX_PATTERN);
+
+		String sourceCity = queryVariables[SOURCE_CITY];
+		int noOfEdges = Integer.valueOf(queryVariables[AT_MOST_EDGES]);
+
 		ReachableNodesDetector detector = new ReachableNodesDetector();
-		List<List<String>> p = detector.getReachableNodesWithinEdges(graph.getAdjacenceyMap(), getSource(queryString), getEdges(queryString));
-		String query = String.format("The reachable cities from %s using %d Edges at Most\n", getSource(queryString), getEdges(queryString));
 
-		for(int edge=1; edge<p.size(); edge++){
-			List<String> reachableEdges = p.get(edge);
+		List<List<String>> allReachableCities;
 		
-			if(edge == 1)
-				query += "Using " + edge + " Edge: " + reachableEdges.toString().replace("[", "").replace("]", "").replace(", ", " ") + '\n';
+		allReachableCities = detector.getReachableNodesWithinEdges(graph.getAdjacenceyMap(),
+																   sourceCity,
+																   noOfEdges);
+
+		StringBuilder result = new StringBuilder();
+
+		result.append(String.format(REACHABLE_CITIES_FROM_CITY_USING_EDGE, sourceCity, noOfEdges));
+		result.append('\n');
+
+		for (int edgesUsed = 1; edgesUsed < allReachableCities.size(); edgesUsed++) {
+
+			List<String> reachableCities = allReachableCities.get(edgesUsed);
 			
-			else if(edge == p.size()-1)
-				query += "Using " + edge + " Edges: " + reachableEdges.toString().replace("[", "").replace("]", "").replace(", ", " ");
+			String reachableCitiesStr = new CollectionToStringConverter().convert(reachableCities, ' ');
 			
-			else
-				query += "Using " + edge + " Edges: " + reachableEdges.toString().replace("[", "").replace("]", "").replace(", ", " ") + '\n';
+			String format = USING_EDGES_CITIES;
+			
+			if(edgesUsed == 1)
+				format = USING_EDGE_CITIES;
+			
+			String currentLine = String.format(format, edgesUsed, reachableCitiesStr);
+			
+			result.append(currentLine);
+			
+			if(edgesUsed != allReachableCities.size()-1)
+				result.append('\n');
+
 		}
-		return query;
-	}
-	
-	public String getSource(String string) {
-		return  extractCity(string, 1);
-	}
-	
-	public int getEdges(String string) {
-		return  Integer.valueOf(extractCity(string, 2));
-	}
 
-	/**
-	 * @param queryString
-	 * @param cityNumber TODO
-	 * @return
-	 */
-	private String extractCity(String queryString, int cityNumber) {
-		Pattern queryPattern = Pattern.compile(QUERY_REGEXP_PATTERN);
-		Matcher matcher = queryPattern.matcher(queryString);
-		
-		matcher.find();
-		
-		String destination = matcher.group(cityNumber);
-		return destination;
-	}	
+		return result.toString();
+	}
 }
