@@ -1,10 +1,5 @@
-package com.orange.citymapper;
+package com.orange.citymapper.queries;
 
-import com.orange.citymapper.queries.CostQuery;
-import com.orange.citymapper.queries.IQuery;
-import com.orange.citymapper.queries.ReachableCitiesAtMostQuery;
-import com.orange.citymapper.queries.RouteQuery;
-import com.orange.citymapper.queries.ShortestPathQuery;
 
 public class QueryFactory {
 	public static IQuery createQuery(String queryLine){

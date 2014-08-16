@@ -7,6 +7,7 @@ import com.orange.citymapper.data.Graph;
 import com.orange.citymapper.io.FileHandler;
 import com.orange.citymapper.parsers.GraphParser;
 import com.orange.citymapper.queries.IQuery;
+import com.orange.citymapper.queries.QueryFactory;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
