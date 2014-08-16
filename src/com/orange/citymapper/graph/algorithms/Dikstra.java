@@ -24,31 +24,31 @@ public class Dikstra {
 										   NodeType destinationNode){
 		
 		Queue<Path<NodeType>> unprocessedNodes = new PriorityQueue<Path<NodeType>>();
-		unprocessedNodes.add(new Path<NodeType>(new ArrayList<NodeType>(Arrays.asList(sourceNode)), 0));
+		unprocessedNodes.add(new Path<NodeType>(sourceNode));
 		
-		Set<NodeType> visited = new HashSet<>();
+		Set<NodeType> visitedBefore = new HashSet<>();
 		
 		while(!unprocessedNodes.isEmpty()){
 			Path<NodeType> currentPath = unprocessedNodes.poll();
 			
 			NodeType currentNode = currentPath.getLastNode();
 			
-			if(visited.contains(currentNode))
-				continue;
-			
-			visited.add(currentNode);
-			
 			if(currentNode.equals(destinationNode))
 				return currentPath;
+						
+			if(visitedBefore.contains(currentNode))
+				continue;
+
+			visitedBefore.add(currentNode);
 			
-			Map<NodeType, Integer> adjacencyMap = graph.get(currentNode);
+			Map<NodeType, Integer> connectedNeighbours = graph.get(currentNode);
 			
-			for(Entry<NodeType, Integer> entry : adjacencyMap.entrySet()){
-				NodeType connectedNode = entry.getKey();
-				int weightToConnectedNode = entry.getValue();
+			for(Entry<NodeType, Integer> entry : connectedNeighbours.entrySet()){
+				NodeType neighboureNode = entry.getKey();
+				int weightToNeighbourNode = entry.getValue();
 				
 				Path<NodeType> newPath = new Path<NodeType>(currentPath);
-				newPath.appendNode(connectedNode, weightToConnectedNode);
+				newPath.appendNode(neighboureNode, weightToNeighbourNode);
 				
 				unprocessedNodes.add(newPath);
 			}
@@ -62,14 +62,16 @@ public class Dikstra {
 		private List<NodeType> nodes;
 		private int cost;
 		
-		public Path(Path<NodeType> path) {
-			List<NodeType> newList = new ArrayList<NodeType>(path.nodes);
-			
-			init(newList, path.cost);
+		public Path(NodeType node) {
+			init(new ArrayList<NodeType>(Arrays.asList(node)), 0);
 		}
 		
 		public Path(List<NodeType> nodes, int cost) {
 			init(nodes, cost);
+		}
+		
+		public Path(Path<NodeType> path) {
+			init(new ArrayList<NodeType>(path.nodes), path.cost);
 		}
 
 		/**
