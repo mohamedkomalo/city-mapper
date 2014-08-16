@@ -28,24 +28,6 @@ public class ShortestPathQueryTests {
 		
 		assertFalse(result);
 	}
-
-	@Test
-	public void testGetSource(){
-		ShortestPathQuery shortestPathQuery = new ShortestPathQuery();
-		
-		String sourceCity = shortestPathQuery.getSource("What is the shortest path between Cairo to Kenna?");
-		
-		assertEquals("Cairo", sourceCity);
-	}
-	
-	@Test
-	public void testGetDestination(){
-		ShortestPathQuery shortestPathQuery = new ShortestPathQuery();
-		
-		String destinationCity = shortestPathQuery.getDestination("What is the shortest path between Cairo to Kenna?");
-		
-		assertEquals("Kenna", destinationCity);
-	}
 	
 	@Test
 	public void testGetResult(){

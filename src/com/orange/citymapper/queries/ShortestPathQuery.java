@@ -6,60 +6,42 @@ import java.util.regex.Pattern;
 import com.orange.citymapper.data.Graph;
 import com.orange.citymapper.graph.algorithms.Dikstra;
 import com.orange.citymapper.graph.algorithms.Dikstra.Path;
+import com.orange.citymapper.parsers.RegexParser;
 
 public class ShortestPathQuery implements IQuery {
+	
+	private static final String WRONG_QUERY_MESSAGE = IQuery.DEFAULT_WRONGE_QUERY_MESSAGE;
+	
+	private static final String QUERY_RESULT_FORMAT = "The shortest path between %s to %s is %d";
 
-	private static final int DEST_NUMBER = 2;
-	private static final int SOURCE_NUMBER = 1;
-	private static final String QUERY_REGEXP_PATTERN = "[Ww]hat is the shortest path between (\\S+) to (\\S+)\\?";
+	private static final String QUERY_REGEX = "[Ww]hat is the shortest path between (\\S+) to (\\S+)\\?";
+	
+	private static final Pattern QUERY_REGEX_PATTERN = Pattern.compile(QUERY_REGEX);
 
+	private static final int SOURCE_CITY = 0;
+	
+	private static final int DESTINATION_CITY = 1;
+	
 	@Override
-	public boolean checkCorrectQuery(String queryString) {
-		return queryString.matches(QUERY_REGEXP_PATTERN);
+	public boolean checkCorrectQuery(String query) {
+		return query.matches(QUERY_REGEX);
 	}
 
 	@Override
-	public String getResult(String queryString, Graph graph) {
-		String sourceCity = getSource(queryString);
-		String destinationCity = getDestination(queryString);
+	public String getResult(String query, Graph graph) {
+		String[] queryVariables = RegexParser.extractVariables(query, QUERY_REGEX_PATTERN);
+		
+		String sourceCity = queryVariables[SOURCE_CITY],
+			   destinationCity = queryVariables[DESTINATION_CITY];
 		
 		Dikstra dikstra = new Dikstra();
-		Path result = dikstra.getShortestPath(graph.getAdjacenceyMap(), sourceCity, destinationCity);
-				
-		String resultFormat = "The shortest path between %s to %s is %d";
 		
-		String resultMessage; 
-		if(result == null){
-			resultMessage = "The query is wronge sir";
+		Path shortestPath = dikstra.getShortestPath(graph.getAdjacenceyMap(), sourceCity, destinationCity);
+		
+		if(shortestPath != null){
+			return String.format(QUERY_RESULT_FORMAT, sourceCity, destinationCity, shortestPath.getCost());
 		}
-		else{
-			resultMessage = String.format(resultFormat, sourceCity, destinationCity, result.getCost());
-		}
-			
-		return resultMessage;
-	}
-
-	public String getSource(String string) {
-		return  extractCity(string, SOURCE_NUMBER);
-	}
-
-	public String getDestination(String string) {
-		return extractCity(string, DEST_NUMBER);
-	}
-
-	/**
-	 * @param queryString
-	 * @param cityNumber TODO
-	 * @return
-	 */
-	private String extractCity(String queryString, int cityNumber) {
-		Pattern queryPattern = Pattern.compile(QUERY_REGEXP_PATTERN);
-		Matcher matcher = queryPattern.matcher(queryString);
 		
-		matcher.find();
-		
-		String destination = matcher.group(cityNumber);
-		return destination;
-	}	
-
+		return WRONG_QUERY_MESSAGE;
+	}
 }
