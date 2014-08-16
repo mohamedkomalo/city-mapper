@@ -36,7 +36,7 @@ public class ShortestPathQuery implements IQuery {
 		
 		Dikstra dikstra = new Dikstra();
 		
-		Path shortestPath = dikstra.getShortestPath(graph.getAdjacenceyMap(), sourceCity, destinationCity);
+		Path<String> shortestPath = dikstra.getShortestPath(graph.getAdjacenceyMap(), sourceCity, destinationCity);
 		
 		if(shortestPath != null){
 			return String.format(QUERY_RESULT_FORMAT, sourceCity, destinationCity, shortestPath.getCost());

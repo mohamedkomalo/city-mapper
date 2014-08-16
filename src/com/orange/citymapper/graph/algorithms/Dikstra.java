@@ -14,21 +14,24 @@ public class Dikstra {
 
 	/***
 	 * 
-	 * @param graph graph represented as adjacency list, nodes are string
+	 * @param graph graph represented as adjacency list, nodes are NodeType
 	 * @param sourceNode
 	 * @param destinationNode
 	 * @return
 	 */
-	public Path getShortestPath(Map<String, Map<String, Integer>> graph, String sourceNode, String destinationNode){
-		Queue<Path> unprocessedNodes = new PriorityQueue<Path>();
-		unprocessedNodes.add(new Path(new ArrayList<>(Arrays.asList(sourceNode)), 0));
+	public <NodeType> Path<NodeType> getShortestPath(Map<NodeType, Map<NodeType, Integer>> graph,
+										   NodeType sourceNode,
+										   NodeType destinationNode){
 		
-		Set<String> visited = new HashSet<>();
+		Queue<Path<NodeType>> unprocessedNodes = new PriorityQueue<Path<NodeType>>();
+		unprocessedNodes.add(new Path<NodeType>(new ArrayList<NodeType>(Arrays.asList(sourceNode)), 0));
+		
+		Set<NodeType> visited = new HashSet<>();
 		
 		while(!unprocessedNodes.isEmpty()){
-			Path currentPath = unprocessedNodes.poll();
+			Path<NodeType> currentPath = unprocessedNodes.poll();
 			
-			String currentNode = currentPath.getLastNode();
+			NodeType currentNode = currentPath.getLastNode();
 			
 			if(visited.contains(currentNode))
 				continue;
@@ -38,13 +41,13 @@ public class Dikstra {
 			if(currentNode.equals(destinationNode))
 				return currentPath;
 			
-			Map<String, Integer> adjacencyMap = graph.get(currentNode);
+			Map<NodeType, Integer> adjacencyMap = graph.get(currentNode);
 			
-			for(Entry<String, Integer> entry : adjacencyMap.entrySet()){
-				String connectedNode = entry.getKey();
+			for(Entry<NodeType, Integer> entry : adjacencyMap.entrySet()){
+				NodeType connectedNode = entry.getKey();
 				int weightToConnectedNode = entry.getValue();
 				
-				Path newPath = new Path(currentPath);
+				Path<NodeType> newPath = new Path<NodeType>(currentPath);
 				newPath.appendNode(connectedNode, weightToConnectedNode);
 				
 				unprocessedNodes.add(newPath);
@@ -55,17 +58,17 @@ public class Dikstra {
 	}
 	
 	
-	public class Path implements Comparable<Path>{
-		private List<String> nodes;
+	public class Path<NodeType> implements Comparable<Path<NodeType>>{
+		private List<NodeType> nodes;
 		private int cost;
 		
-		public Path(Path path) {
-			List<String> newList = new ArrayList<String>(path.nodes);
+		public Path(Path<NodeType> path) {
+			List<NodeType> newList = new ArrayList<NodeType>(path.nodes);
 			
 			init(newList, path.cost);
 		}
 		
-		public Path(List<String> nodes, int cost) {
+		public Path(List<NodeType> nodes, int cost) {
 			init(nodes, cost);
 		}
 
@@ -73,12 +76,12 @@ public class Dikstra {
 		 * @param nodes
 		 * @param cost
 		 */
-		private void init(List<String> nodes, int cost) {
+		private void init(List<NodeType> nodes, int cost) {
 			this.nodes = nodes;
 			this.cost = cost;
 		}
 
-		public List<String> getNodes() {
+		public List<NodeType> getNodes() {
 			return nodes;
 		}
 		
@@ -86,17 +89,17 @@ public class Dikstra {
 			return cost;
 		}
 		
-		public void appendNode(String nodeName, int weight){
+		public void appendNode(NodeType nodeName, int weight){
 			this.nodes.add(nodeName);
 			this.cost += weight;
 		}
 		
-		public String getLastNode(){
+		public NodeType getLastNode(){
 			return nodes.get(nodes.size()-1);
 		}
 
 		@Override
-		public int compareTo(Path o) {
+		public int compareTo(Path<NodeType> o) {
 			return cost - o.cost;
 		}
 	}

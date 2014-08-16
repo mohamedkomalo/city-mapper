@@ -34,7 +34,7 @@ public class RouteQuery implements IQuery {
 			   destinationCity = queryVariables[DESTINATION_CITY];
 		
 		Dikstra dikstra = new Dikstra();
-		Path shortestPath = dikstra.getShortestPath(graph.getAdjacenceyMap(), sourceCity, destinationCity);
+		Path<String> shortestPath = dikstra.getShortestPath(graph.getAdjacenceyMap(), sourceCity, destinationCity);
 		
 		if(shortestPath != null){
 			String route = new CollectionToStringConverter().convert(shortestPath.getNodes(), ' ');
