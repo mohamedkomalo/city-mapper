@@ -43,7 +43,8 @@ public class Graph {
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Graph){
-			return graph.equals((Map<String, Map<String, Edge>>) graph);
+			Graph obj2 = (Graph)obj;
+			return graph.equals(obj2.graph);
 		}
 		return super.equals(obj);
 	}

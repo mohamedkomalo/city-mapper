@@ -47,7 +47,7 @@ public class GraphParserTests {
 		
 		Graph expectedGraph = new Graph();
 		City cairo = new City("Cairo"),
-			 alexendria = new City("Alexendria"),
+			 alexendria = new City("Alexandria"),
 			 tanta = new City("Tanta"),
 			 kenna = new City("Kenna"),
 			 sinai = new City("Sinai");
