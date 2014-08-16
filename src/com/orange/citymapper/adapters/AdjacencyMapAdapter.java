@@ -21,7 +21,7 @@ class AdjacencyMapAdapter extends AbstractMap<String, Integer>{
 		
 		@Override
 		public Integer get(Object key) {
-			return originalMap.get(key).getCost();
+			return originalMap.get(key).getDistance();
 		}
 		
 		@Override

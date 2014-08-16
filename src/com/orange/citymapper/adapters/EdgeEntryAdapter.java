@@ -19,7 +19,7 @@ public class EdgeEntryAdapter implements Entry<String, Integer>{
 
 	@Override
 	public Integer getValue() {
-		return originalEntry.getValue().getCost();
+		return originalEntry.getValue().getDistance();
 	}
 
 	@Override

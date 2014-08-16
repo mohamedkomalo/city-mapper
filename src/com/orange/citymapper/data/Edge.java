@@ -7,12 +7,13 @@ package com.orange.citymapper.data;
 public class Edge {
 	private City source;
 	private City destination;
-	private int cost;
+	private int distance;
+	
 	public Edge(City source, City destination, int cost) {
 		super();
 		this.source = source;
 		this.destination = destination;
-		this.cost = cost;
+		this.distance = cost;
 	}
 	public City getSource() {
 		return source;
@@ -20,18 +21,18 @@ public class Edge {
 	public City getDestination() {
 		return destination;
 	}
-	public int getCost() {
-		return cost;
+	public int getDistance() {
+		return distance;
 	}
-	public void setCost(int cost) {
-		this.cost = cost;
+	public void setDistance(int cost) {
+		this.distance = cost;
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Edge){
 			Edge e = (Edge)obj;
-			return this.cost == e.cost && 
+			return this.distance == e.distance && 
 				   this.source.equals(e.source) && 
 				   this.destination.equals(e.destination);
 		}
