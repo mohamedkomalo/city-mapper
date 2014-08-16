@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import com.orange.citymapper.data.Graph;
+import com.orange.citymapper.io.FileHandler;
 import com.orange.citymapper.parsers.GraphParser;
 import com.orange.citymapper.queries.IQuery;
 

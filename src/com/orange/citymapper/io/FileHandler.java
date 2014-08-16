@@ -1,4 +1,4 @@
-package com.orange.citymapper;
+package com.orange.citymapper.io;
 
 import java.io.FileWriter;
 import java.io.IOException;
