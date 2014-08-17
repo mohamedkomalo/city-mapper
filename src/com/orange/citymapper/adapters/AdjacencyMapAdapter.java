@@ -21,6 +21,9 @@ class AdjacencyMapAdapter extends AbstractMap<String, Integer>{
 		
 		@Override
 		public Integer get(Object key) {
+			if(!originalMap.containsKey(key))
+				return null;
+			
 			return originalMap.get(key).getDistance();
 		}
 		

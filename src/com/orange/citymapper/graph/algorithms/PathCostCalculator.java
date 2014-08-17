@@ -17,7 +17,16 @@ public class PathCostCalculator {
 		while (iterator.hasNext()) {
 			currentNode = iterator.next();
 			
-			int currentWeight = graph.get(previousNode).get(currentNode);
+			Map<String, Integer> adjacencyMap = graph.get(previousNode);
+			
+			if(adjacencyMap == null)
+				return -1;
+			
+			Integer currentWeight = adjacencyMap.get(currentNode);
+
+			if(currentWeight == null)
+				return -1;
+			
 			totalCost += currentWeight;
 			
 			previousNode = currentNode;
