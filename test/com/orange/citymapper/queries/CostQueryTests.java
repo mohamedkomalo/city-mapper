@@ -38,10 +38,10 @@ public class CostQueryTests {
 	public void testExtractCities(){
 		CostQuery costquery = new CostQuery();
 		String query = "What is the Cost of Path Cairo Sinai Tanta?";
-		List<String> cities =costquery.extractCities(query);
-		assertEquals("Cairo",cities.get(0));
-		assertEquals("Sinai",cities.get(1));
-		assertEquals("Tanta",cities.get(2));
+		String[] cities =costquery.extractCities(query);
+		assertEquals("Cairo",cities[0]);
+		assertEquals("Sinai",cities[1]);
+		assertEquals("Tanta",cities[2]);
 	}
 	
 	//	@Test

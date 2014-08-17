@@ -7,13 +7,19 @@ import java.util.regex.Pattern;
 
 import com.orange.citymapper.data.City;
 import com.orange.citymapper.data.Graph;
+import com.orange.citymapper.parsers.RegexParser;
 
 public class CostQuery implements IQuery {
 
-	String QUERY_REGEXP_PATTERN="^What is the Cost of Path (.*)\\?$";
+	private static final String QUERY_REGEX = "What is the Cost of Path (.*)\\?";
+	
+	private static final Pattern QUERY_REGEX_PATTERN = Pattern.compile(QUERY_REGEX);
+
+	private static final int ALL_CITIES = 0;
+	
 	@Override
 	public boolean checkCorrectQuery(String queryString) {
-		return queryString.matches(QUERY_REGEXP_PATTERN);
+		return queryString.matches(QUERY_REGEX);
 	}
 
 	@Override
@@ -23,19 +29,10 @@ public class CostQuery implements IQuery {
 		return null;
 	}
 
-	public List<String> extractCities(String queryString) {
-	
-		Pattern queryPattern = Pattern.compile(QUERY_REGEXP_PATTERN);
-		Matcher matcher = queryPattern.matcher(queryString);
+	public String[] extractCities(String queryString) {
+		String[] queryVariables = new RegexParser().extractVariables(queryString, QUERY_REGEX_PATTERN);
 		
-		matcher.find();
-		List<String> cities= new ArrayList<String>();
-		for(int i=0 ;i<matcher.groupCount();i++){
-			String city = matcher.group(i);
-			cities.add(city);
-		}		
-		
-		return cities;
+		return queryVariables[ALL_CITIES].split(" ");
 	}
 
 }
