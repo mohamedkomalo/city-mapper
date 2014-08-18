@@ -12,7 +12,7 @@ import com.orange.citymapper.data.City;
 import com.orange.citymapper.data.Edge;
 import com.orange.citymapper.data.Graph;
 
-public class ReachableCitiesAtMostTests {
+public class ReachableCitiesAtMostTest {
 
 	@Test
 	public void testCheckCorrectQuery() {

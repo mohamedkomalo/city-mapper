@@ -9,7 +9,7 @@ import com.orange.citymapper.data.Edge;
 import com.orange.citymapper.data.Graph;
 import com.orange.citymapper.queries.ShortestPathQuery;
 
-public class ShortestPathQueryTests {
+public class ShortestPathQueryTest {
 
 	@Test
 	public void testCheckCorrectQueryWihValidQuerySyntax() {

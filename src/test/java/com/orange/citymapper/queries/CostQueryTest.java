@@ -10,7 +10,7 @@ import com.orange.citymapper.data.City;
 import com.orange.citymapper.data.Edge;
 import com.orange.citymapper.data.Graph;
 
-public class CostQueryTests {
+public class CostQueryTest {
 
 	@Test
 	public void testCostQueryWithValidMultipleCities() {

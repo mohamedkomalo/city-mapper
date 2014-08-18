@@ -12,3 +12,9 @@
 hs_err_pid*
 /bin
 out.txt
+/target
+
+
+/.settings
+.project
+.classpath

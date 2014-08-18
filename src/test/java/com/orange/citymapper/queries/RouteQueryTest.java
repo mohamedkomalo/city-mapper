@@ -9,7 +9,7 @@ import com.orange.citymapper.data.City;
 import com.orange.citymapper.data.Edge;
 import com.orange.citymapper.data.Graph;
 
-public class RouteQueryTests {
+public class RouteQueryTest {
 
 	private static final String KENNA_NAME = "Kenna";
 	private static final String SINAI_NAME = "Sinai";

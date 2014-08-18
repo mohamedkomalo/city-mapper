@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-public class RegexParserTests {
+public class RegexParserTest {
 
 	@Test
 	public void testParseNormalRegEx() {

@@ -11,7 +11,7 @@ import com.orange.citymapper.data.Edge;
 import com.orange.citymapper.data.Graph;
 import com.orange.citymapper.parsers.GraphParser;
 
-public class GraphParserTests {
+public class GraphParserTest {
 
 	@Test
 	public void testParseEdgeLine(){

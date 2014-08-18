@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class ReachableNodesDetectorTest {
 	
-	@Test(timeout=10)
+	@Test()
 	public void testGetReachableNodesWithEdgeLimit(){
 		Map<String, Map<String, Integer>> graph = new HashMap<>();
 		graph.put("Cairo", new HashMap<String, Integer>());
